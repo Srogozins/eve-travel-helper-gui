@@ -6,10 +6,14 @@ describe('Controller: MainCtrl', function () {
   beforeEach(module('eveTravelHelperApp'));
 
   var MainCtrl,
-    scope;
+    scope,
+    $httpBackend;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope) {
+  beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
+    $httpBackend = _$httpBackend_;
+    $httpBackend.expectGET('http://127.0.0.1:5000/systems').
+        respond({systems: [{name: 'SYS1'}, {name: 'SYS2'}]});
     scope = $rootScope.$new();
     MainCtrl = $controller('MainCtrl', {
       $scope: scope
@@ -18,5 +22,10 @@ describe('Controller: MainCtrl', function () {
 
   it('should attach a list of awesomeThings to the scope', function () {
     expect(scope.awesomeThings.length).toBe(3);
+  });
+  it('should create "systems" model', function () {
+    expect(scope.systems).toBeUndefined();
+    $httpBackend.flush();
+    expect(scope.systems).toEqual([{name: 'SYS1'}, {name: 'SYS2'}]);
   });
 });
