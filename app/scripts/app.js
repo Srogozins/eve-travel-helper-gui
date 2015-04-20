@@ -6,7 +6,7 @@
  * @description
  * # eveTravelHelperApp
  *
- * Main module of the application.
+ * Main module of the EVE Online Travel Helper GUI application.
  */
 angular
   .module('eveTravelHelperApp', [
@@ -32,4 +32,5 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  });
+  })
+  .constant('ETHConfig', {API_END_POINT: 'http://127.0.0.1:5000'});
