@@ -8,27 +8,29 @@
   * Controller of the eveTravelHelperApp
   */
   angular.module('eveTravelHelperApp')
-  .controller('MainCtrl', ['$scope', '$http', '$log', 'ETHConfig', function ($scope, $http, $log, ETHConfig) {
+  .controller('MainCtrl', ['$scope', '$http', '$log', 'Systems', function ($scope, $http, $log, Systems) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-    // TODO: implement a resource to handle this
-    $http.get(ETHConfig.API_END_POINT + '/systems').success(function(data) {
-      $scope.systems = data.systems;
-    });
 
     // TODO: modularise pagination
+    $scope.systems = [];
+    $scope.currentPage = 1;
+    $scope.pageChanged = function() {
+      $log.log('Page changed to: ' + $scope.currentPage);
+      Systems.list($scope.currentPage)
+      .success(function(data) {
+        $scope.systems = data.systems;
+      });
+    };
+    $scope.pageChanged();
+
     $scope.itemsPerPage = 20;
     $scope.maxSize = 10;
     $scope.totalItems = 8030;
 
-    $scope.pageChanged = function() {
-      $log.log('Page changed to: ' + $scope.currentPage);
-      $http.get(ETHConfig.API_END_POINT + '/systems/page/' + $scope.currentPage + '?per_page=' + $scope.itemsPerPage).success(function(data) {
-        $scope.systems = data.systems;
-      });
-    };
+
   }]);
 }());
