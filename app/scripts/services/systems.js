@@ -6,6 +6,7 @@
   * @description
   * # Systems
   * Service for accessing solar system data
+  * @requires $http $log ETHConfig
   */
   angular.module('eveTravelHelperApp')
   .service('Systems', ['$http', '$log', 'ETHConfig', function($http, $log, ETHConfig) {
@@ -18,8 +19,9 @@
     * @description
     * # list
     * Retrieves paginated solar system data,
-    * @param {int} page page number to retrieve, defaults to 1
-    * @param {int} number of systems per page, defaults to 20
+    * @param {integer} page page number to retrieve, defaults to 1
+    * @param {integer} number of systems per page, defaults to 20
+    * @returns {HttpPromise} promise of the requested system data page
     */
     this.list = function(page, perPage) {
       if( typeof page === 'undefined' ){page = 1;}
