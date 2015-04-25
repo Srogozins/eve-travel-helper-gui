@@ -8,7 +8,7 @@
 // 'test/spec/**/*.js'
 
 module.exports = function (grunt) {
-
+  grunt.loadNpmTasks('grunt-ngdocs');
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
@@ -23,7 +23,9 @@ module.exports = function (grunt) {
 
   // Define the configuration for all the tasks
   grunt.initConfig({
-
+    ngdocs: {
+      all: ['app/scripts/**/*.js']
+    },
     // Project settings
     yeoman: appConfig,
 
