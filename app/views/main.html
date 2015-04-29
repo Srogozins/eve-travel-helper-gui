@@ -4,5 +4,5 @@
       <p>{{system.name}}</p>
     </li>
   </ul>
-  <pagination ng-model="currentPage" ng-change="pageChanged()" boundary-links="true" max-size="maxSize" total-items="totalItems" items-per-page="itemsPerPage"></pagination>
+  <eth-paged items="systems" list-fn="listFn(page)" extract-fn="extractFn(data)"></eth-paged>
 </div>
