@@ -3,8 +3,12 @@
 /**
  * @ngdoc directive
  * @name eveTravelHelperApp.directive:ethPaged
+ * @scope
+ * @restrict E
  * @description
  * # ethPaged
+ * Wrapper for ui-bootstrap's pagination, encapsulating interaction between
+ * services and variables
  */
 angular.module('eveTravelHelperApp')
   .directive('ethPaged', function() {
@@ -23,8 +27,8 @@ angular.module('eveTravelHelperApp')
         $scope.pageChanged = function() {
           $log.log('Page changed to: ' + $scope.currentPage);
           $scope.listFn({page: $scope.currentPage})
-          .success(function(data) {
-            $scope.items = $scope.extractFn({data: data});
+          .then(function(result) {
+            $scope.items = $scope.extractFn({data: result.data});
           });
         };
         $scope.pageChanged();
