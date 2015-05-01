@@ -33,10 +33,12 @@
         params: {per_page: perPage}
         })
         .success(function(data) {
-          $log.log('System data retrieved: ' + data);
+          $log.log('System data retrieved: ');
+          $log.log(data);
         })
         .error(function(data) {
-          $log.log('System data retrieval failed: ' + data);
+          $log.log('System data retrieval failed: ');
+          $log.log(data);
         });
 
         };
