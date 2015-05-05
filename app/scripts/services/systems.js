@@ -9,7 +9,7 @@
   * @requires $http $log ETHConfig
   */
   angular.module('eveTravelHelperApp')
-  .service('Systems', ['$http', '$log', 'ETHConfig', function($http, $log, ETHConfig) {
+  .service('Systems', ['$http', '$log', 'paginationConfig', 'ETHConfig', function($http, $log, paginationConfig, ETHConfig) {
     var SYSTEM_END_POINT = ETHConfig.API_END_POINT + '/systems';
     var PAGE_SUFFIX = '/page';
 
@@ -25,7 +25,9 @@
     */
     this.list = function(page, perPage) {
       if( typeof page === 'undefined' ){page = 1;}
-      if( typeof perPage === 'undefined' ) {perPage = 20;}
+      if( typeof perPage === 'undefined' ) {
+        perPage = paginationConfig.itemsPerPage;
+      }
       /*jshint camelcase: false */
       return $http({
         url: SYSTEM_END_POINT + PAGE_SUFFIX + '/' + page,

@@ -20,7 +20,7 @@ angular
     'ngTouch',
     'ui.bootstrap'
   ])
-  .config(function ($routeProvider) {
+  .config(['$routeProvider', 'paginationConfig', function ($routeProvider, paginationConfig) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -33,5 +33,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
-  })
+      paginationConfig.itemsPerPage = 20;
+      paginationConfig.maxSize = 10;
+  }])
   .constant('ETHConfig', {API_END_POINT: 'http://127.0.0.1:5000'});
