@@ -21,8 +21,6 @@ angular.module('eveTravelHelperApp')
       controller: ['$scope', '$attrs', '$log', function($scope, $attrs, $log) {
         $scope.items = [];
         $scope.currentPage = 1;
-        $scope.itemsPerPage = 20;
-        $scope.maxSize = 10;
         $scope.totalItems = 8030;
         $scope.pageChanged = function() {
           $log.log('Page changed to: ' + $scope.currentPage);
@@ -34,7 +32,7 @@ angular.module('eveTravelHelperApp')
         $scope.pageChanged();
 
       }],
-      template: '<pagination ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" total-items="totalItems"></pagination>',
+      template: '<pagination ng-model="currentPage" ng-change="pageChanged()" total-items="totalItems"></pagination>',
       restrict: 'E'
     };
   });
