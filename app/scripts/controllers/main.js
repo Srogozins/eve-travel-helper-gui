@@ -20,5 +20,8 @@
       $scope.extractFn = function(data) {
         return data.systems;
       };
+      $scope.extractTotalFn = function(data) {
+        return data.total_systems;
+      };
     }]);
 }());

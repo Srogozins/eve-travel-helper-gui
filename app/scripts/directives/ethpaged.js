@@ -16,17 +16,19 @@ angular.module('eveTravelHelperApp')
       scope: {
         items: '=',
         listFn: '&',
-        extractFn: '&'
+        extractFn: '&',
+        extractTotalFn: '&'
       },
       controller: ['$scope', '$attrs', '$log', function($scope, $attrs, $log) {
         $scope.items = [];
         $scope.currentPage = 1;
-        $scope.totalItems = 8030;
+        $scope.totalItems = 0;
         $scope.pageChanged = function() {
           $log.log('Page changed to: ' + $scope.currentPage);
           $scope.listFn({page: $scope.currentPage})
           .then(function(result) {
             $scope.items = $scope.extractFn({data: result.data});
+            $scope.totalItems = $scope.extractTotalFn({data: result.data});
           });
         };
         $scope.pageChanged();
