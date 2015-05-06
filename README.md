@@ -4,6 +4,7 @@ AngularJS GUI for Eve Online travel helper
 ### Setup and running
 * Clone the repository
 * install nodejs
+* run `npm install` to install dependencies
 * install grunt
 * cd to repository root
 * run `grunt` to build in eve-travel-helper-gui/app/dist
