@@ -33,6 +33,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+      paginationConfig.boundaryLinks = true;
       paginationConfig.itemsPerPage = 20;
       paginationConfig.maxSize = 10;
   }])
