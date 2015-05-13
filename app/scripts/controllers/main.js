@@ -8,7 +8,7 @@
    * Controller of the eveTravelHelperApp
    */
   angular.module('eveTravelHelperApp')
-    .controller('MainCtrl', ['$scope', '$http', '$log', 'Systems', function($scope, $http, $log, Systems) {
+    .controller('MainCtrl', ['$scope', '$http', '$log', 'Systems', 'ETHConfig', function($scope, $http, $log, Systems, ETHConfig) {
       $scope.awesomeThings = [
         'HTML5 Boilerplate',
         'AngularJS',
@@ -26,8 +26,10 @@
       $scope.extractTotalFn = function(data) {
         return data.total_systems;
       };
+
+      // TODO: Factor out
       $scope.getRoute = function() {
-        $http.get('http://127.0.0.1:5000/routes/systems/shortest?from=' + $scope.start + '&to=' + $scope.destination)
+        $http.get(ETHConfig.API_END_POINT + '/routes/systems/shortest?from=' + $scope.start + '&to=' + $scope.destination)
         .success(function(data, status, headers, config){$scope.route = data.route});
       };
     }]);
