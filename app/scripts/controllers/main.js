@@ -15,6 +15,7 @@
         'Karma'
       ];
       $scope.systems = [];
+      $scope.isLoading = null;
       $scope.listFn = Systems.list;
       $scope.start = null;
       $scope.destination = null;
@@ -28,9 +29,9 @@
       };
 
       // TODO: Factor out
-      $scope.getRoute = function() {
-        $http.get(ETHConfig.API_END_POINT + '/routes/systems/shortest?from=' + $scope.start + '&to=' + $scope.destination)
-        .success(function(data, status, headers, config){$scope.route = data.route});
-      };
+    $scope.getRoute = function() {
+      $http.get(ETHConfig.API_END_POINT + '/routes/systems/shortest?from=' + $scope.start + '&to=' + $scope.destination)
+      .success(function(data, status, headers, config){$scope.route = data.route});
+    };
     }]);
 }());

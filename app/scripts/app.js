@@ -18,7 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'smart-table'
   ])
   .config(['$routeProvider', 'paginationConfig', function ($routeProvider, paginationConfig) {
     $routeProvider

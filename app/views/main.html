@@ -1,18 +1,37 @@
 <h1>Shortest route(s) between two systems</h1>
 <form ng-submit="getRoute()">
   <p ng-show="!(source || destination)">Pick start and destination system</p>
-  <div ng-show="!(systems.length==0)">
-    <ul>
-      <li ng-repeat="system in systems">
-        {{system.name}}
-        <div class="btn-group">
-          <button type="button" class="btn btn-primary" ng-model="$parent.start" btn-radio="{{system.id}}">Start</button>
-          <button type="button" class="btn btn-primary" ng-model="$parent.destination" btn-radio="{{system.id}}">Destination</button>
-        </div>
-      </li>
-    </ul>
-    <eth-paged items="systems" list-fn="listFn(page)" extract-fn="extractFn(data)" extract-total-fn="extractTotalFn(data)"></eth-paged>
-  </div>
+  <table class="table" st-table="systems">
+    <thead>
+      <tr>
+        <th st-sort="name">Name</th>
+        <th>Pick as</th>
+      </tr>
+    </thead>
+    <tbody ng-show="!isLoading">
+      <tr ng-repeat="system in systems">
+        <td>{{system.name}}</td>
+        <td>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" ng-model="$parent.start" btn-radio="{{system.id}}">Start</button>
+            <button type="button" class="btn btn-primary" ng-model="$parent.destination" btn-radio="{{system.id}}">Destination</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tbody ng-show="isLoading">
+      <tr>
+        <td colspan="4" class="text-center">Loading ... </td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <eth-paged items="systems" is-loading="isLoading" list-fn="listFn(page)" extract-fn="extractFn(data)" extract-total-fn="extractTotalFn(data)"></eth-paged>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
   <button type="submit" class="btn btn-default">Calculate shortest route(s)</button>
 </form>
 <div ng-show="route">

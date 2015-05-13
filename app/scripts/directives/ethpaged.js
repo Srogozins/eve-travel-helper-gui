@@ -15,12 +15,14 @@ angular.module('eveTravelHelperApp')
     return {
       scope: {
         items: '=',
+        isLoading: '=',
         listFn: '&',
         extractFn: '&',
         extractTotalFn: '&'
       },
       controller: ['$scope', '$attrs', '$log', function($scope, $attrs, $log) {
         $scope.items = [];
+        $scope.isLoading = true;
         $scope.currentPage = 1;
         $scope.totalItems = 0;
         $scope.pageChanged = function() {
@@ -29,6 +31,7 @@ angular.module('eveTravelHelperApp')
           .then(function(result) {
             $scope.items = $scope.extractFn({data: result.data});
             $scope.totalItems = $scope.extractTotalFn({data: result.data});
+            $scope.isLoading = false;
           });
         };
         $scope.pageChanged();
