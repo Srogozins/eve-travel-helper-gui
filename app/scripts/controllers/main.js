@@ -19,6 +19,7 @@
       $scope.listFn = Systems.list;
       $scope.start = null;
       $scope.destination = null;
+      $scope.waypoints = [];
       $scope.route = null;
 
       $scope.extractFn = function(data) {
@@ -30,7 +31,7 @@
 
       // TODO: Factor out
     $scope.getRoute = function() {
-      $http.get(ETHConfig.API_END_POINT + '/routes/systems/shortest?from=' + $scope.start + '&to=' + $scope.destination)
+      $http.post(ETHConfig.API_END_POINT + '/routes/systems/shortest', {waypoints: $scope.waypoints})
       .success(function(data, status, headers, config){$scope.route = data.route});
     };
     }]);

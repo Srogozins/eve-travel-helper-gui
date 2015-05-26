@@ -1,11 +1,11 @@
 <h1>Shortest route(s) between two systems</h1>
 <form ng-submit="getRoute()">
-  <p ng-show="!(source || destination)">Pick start and destination system</p>
+  <p ng-show="!(source || destination)">Pick route waypoints</p>
   <table class="table" st-table="systems">
     <thead>
       <tr>
         <th st-sort="name">Name</th>
-        <th>Pick as</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody ng-show="!isLoading">
@@ -13,8 +13,7 @@
         <td>{{system.name}}</td>
         <td>
           <div class="btn-group">
-            <button type="button" class="btn btn-primary" ng-model="$parent.start" btn-radio="{{system.id}}">Start</button>
-            <button type="button" class="btn btn-primary" ng-model="$parent.destination" btn-radio="{{system.id}}">Destination</button>
+            <button type="button" class="btn btn-primary" ng-click="$parent.waypoints.push(system.id)">Add as a waypoint</button>
           </div>
         </td>
       </tr>
@@ -32,8 +31,17 @@
       </tr>
     </tfoot>
   </table>
-  <button type="submit" class="btn btn-default">Calculate shortest route(s)</button>
+  <div ng-show="waypoints">
+    <h2>Picked waypoints</h2>
+    {{waypoints}}
+  </div>
+  <div class="btn-group">
+    <button type="submit" class="btn btn-default">Calculate shortest route(s)</button>
+    <button ng-click="waypoints=[]" class="btn btn-default">Drop waypoints</button>
+  </div>
 </form>
+
+
 <div ng-show="route">
   <h2>Calculated route</h2>
   {{route}}
